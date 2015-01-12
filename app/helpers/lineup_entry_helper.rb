@@ -1,0 +1,2 @@
+module LineupEntryHelper
+end
