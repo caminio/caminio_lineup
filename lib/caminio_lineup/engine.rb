@@ -1,3 +1,5 @@
+require "caminio"
+
 module CaminioLineup
   class Engine < ::Rails::Engine
 

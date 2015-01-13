@@ -7,7 +7,7 @@ module Caminio
       default_format :json
       # helpers Caminio::UsersHelper
       # helpers Caminio::ApplicationHelper
-      # helpers Caminio::AuthHelper
+      helpers Caminio::AuthHelper
 
       #
       # GET /
@@ -23,7 +23,7 @@ module Caminio
       #
       desc "returns lineup_entry with :id"
       get ':id' do
-        # authenticate!
+        authenticate!
         # error!('InsufficientRights', 403) unless params.id == @token.user_id.to_s || @token.user.is_admin?
         entry = LineupEntry.where(id: params.id).first
         error!('NotFound',404) unless entry

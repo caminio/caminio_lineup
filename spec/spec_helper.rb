@@ -1,6 +1,7 @@
 ENV['RAILS_ENV'] ||= 'test'
 
 require "caminio"
+require "caminio/helpers"
 
 Dir.glob( File.expand_path("../../app/{helpers,entities,api}", __FILE__)+'/**/*.rb' ).each do |file|
   require file
