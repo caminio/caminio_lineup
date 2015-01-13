@@ -6,6 +6,7 @@ describe Caminio::V1::LineupEntries do
 
     before :each do
       @user = create(:user)
+      @lineup_entry = create(:lineup_entry)
       @url = "v1/lineup_entries"
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
       header 'Organization-id', @user.organizations.first
@@ -17,14 +18,14 @@ describe Caminio::V1::LineupEntries do
       expect( json ).to have_key(:lineup_entries)
     end
 
-    # describe "json return properties" do
+    describe "json return properties" do
 
-    #   before :each do
-    #     get "v1/users/#{@user.id}"
-    #   end
+      before :each do
+        get "v1/lineup_entries/#{@lineup_entry.id}"
+      end
 
-    #   it{ expect( json.user ).to have_key(:id) }
-    #   it{ expect( json.user ).to have_key(:username) }
+      it{ expect( json.lineup_entry ).to have_key(:id) }
+      it{ expect( json.lineup_entry ).to have_key(:categories) }
     #   it{ expect( json.user ).to have_key(:firstname) }
     #   it{ expect( json.user ).to have_key(:lastname) }
     #   it{ expect( json.user ).to have_key(:email) }
@@ -32,7 +33,7 @@ describe Caminio::V1::LineupEntries do
     #   it{ expect( json.user ).to have_key(:editor) }
     #   it{ expect( json.user ).not_to have_key(:password_digest) }
 
-    # end
+    end
 
   end
 end
