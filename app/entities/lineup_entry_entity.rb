@@ -1,6 +1,6 @@
 class LineupEntryEntity < Grape::Entity
         
-  root :lineup_entries, :lineup_entry
+  # root :lineup_entries, :lineup_entry
 
   expose :id
   expose :categories

@@ -5,8 +5,6 @@ module Caminio
     class LineupEntries < Grape::API
 
       default_format :json
-      # helpers Caminio::UsersHelper
-      # helpers Caminio::ApplicationHelper
       helpers Caminio::AuthHelper
 
       #
@@ -15,7 +13,7 @@ module Caminio
       desc "lists all lineup_entries"
       get do
         lineup_entries = LineupEntry.all
-        present lineup_entries, with: LineupEntryEntity
+        present :lineup_entries, lineup_entries, with: LineupEntryEntity
       end
 
       #
@@ -24,10 +22,9 @@ module Caminio
       desc "returns lineup_entry with :id"
       get ':id' do
         authenticate!
-        # error!('InsufficientRights', 403) unless params.id == @token.user_id.to_s || @token.user.is_admin?
         entry = LineupEntry.where(id: params.id).first
         error!('NotFound',404) unless entry
-        present entry, with: LineupEntryEntity
+        present :lineup_entry, entry, with: LineupEntryEntity
       end
 
 

@@ -15,6 +15,7 @@ describe Caminio::V1::LineupEntries do
     it "returns lineup_entries json" do
       get @url
       expect( last_response.status ).to be == 200
+      puts last_response.body.inspect
       expect( json ).to have_key(:lineup_entries)
     end
 
@@ -24,6 +25,7 @@ describe Caminio::V1::LineupEntries do
         get "v1/lineup_entries/#{@lineup_entry.id}"
       end
 
+      it{ puts json.lineup_jobs.inspect }
       it{ expect( json.lineup_entry ).to have_key(:id) }
       it{ expect( json.lineup_entry ).to have_key(:categories) }
     #   it{ expect( json.user ).to have_key(:firstname) }
