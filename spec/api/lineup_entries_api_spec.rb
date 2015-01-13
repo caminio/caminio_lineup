@@ -26,6 +26,10 @@ describe Caminio::V1::LineupEntries do
 
       it{ expect( json.lineup_entry ).to have_key(:id) }
       it{ expect( json.lineup_entry ).to have_key(:categories) }
+      it{ expect( json.lineup_entry ).to have_key(:age) }
+      it{ expect( json.lineup_entry ).to have_key(:recommended_age) }
+      it{ expect( json.lineup_entry ).to have_key(:duration_min) }
+      it{ expect( json.lineup_entry ).to have_key(:num_breaks) }
 
     end
 

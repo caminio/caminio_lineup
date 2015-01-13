@@ -4,8 +4,6 @@ class LineupVenue
   include Caminio::Timestamps
   include Caminio::Userstamps
 
-  field :tag, type: Array, default: []
-
   field :reach_by_bus, type: String
   field :reach_by_tram, type: String
   field :reach_by_train, type: String
@@ -14,7 +12,7 @@ class LineupVenue
 
   embeds_one :lineup_attributes
   
-  has_one :location
+  belongs_to :location
 
   # todo map location
 end

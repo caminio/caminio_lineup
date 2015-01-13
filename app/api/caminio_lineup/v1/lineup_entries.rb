@@ -34,6 +34,10 @@ module Caminio
       params do
         requires :lineup_entry, type: Hash do
           optional :categories
+          optional :age
+          optional :recommended_age
+          optional :duration_min
+          optional :num_breaks
         end
       end
       post do
@@ -50,6 +54,10 @@ module Caminio
       params do
         requires :lineup_entry, type: Hash do
           optional :categories
+          optional :age
+          optional :recommended_age
+          optional :duration_min
+          optional :num_breaks
         end
       end
       put '/:id' do
