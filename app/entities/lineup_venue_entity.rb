@@ -6,8 +6,8 @@ class LineupVenueEntity < Grape::Entity
   expose :reach_by_tram
   expose :reach_by_train
   expose :opening_hours
-  expose :tags
 
+  expose :tags
   expose :ext_ref_id
   expose :ext_ref_src
   expose :ext_ref_note

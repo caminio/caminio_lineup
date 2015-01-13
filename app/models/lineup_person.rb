@@ -1,6 +1,9 @@
 class LineupPerson
   
   include Mongoid::Document
+  include Caminio::Timestamps
+  include Caminio::Userstamps
+  include LineupAttributes
 
   field :firstname, type: String
   field :midname, type: String
@@ -10,6 +13,5 @@ class LineupPerson
   field :position, type: Integer
 
   belongs_to :location
-  embeds_one :lineup_attributes
   
 end
