@@ -34,7 +34,7 @@ describe Caminio::V1::LineupEntries do
     end
 
   end
-  describe "POST /lineup_entries" do
+  describe "POST /lineup_entries", focus: true do
 
     before :each do
       @user = create(:user)

@@ -12,7 +12,6 @@ module Caminio
       #
       desc "lists all lineup_venues"
       get do
-        puts "inside"
         lineup_venues = LineupVenue.all
         present :lineup_venues, lineup_venues, with: LineupVenueEntity
       end
@@ -38,6 +37,17 @@ module Caminio
           optional :reach_by_bus
           optional :reach_by_tram
           optional :reach_by_train
+          optional :tags
+          optional :ext_ref_id
+          optional :ext_ref_src
+          optional :ext_ref_note
+          optional :ext_ref_sync_at
+          optional :orig_url
+          optional :ext_url
+          optional :video_url
+          optional :video_type
+          optional :others_write
+          optional :notify_me_on_write
         end
       end
       post do
@@ -57,6 +67,17 @@ module Caminio
           optional :reach_by_bus
           optional :reach_by_tram
           optional :reach_by_train
+          optional :tags
+          optional :ext_ref_id
+          optional :ext_ref_src
+          optional :ext_ref_note
+          optional :ext_ref_sync_at
+          optional :orig_url
+          optional :ext_url
+          optional :video_url
+          optional :video_type
+          optional :others_write
+          optional :notify_me_on_write
         end
       end
       put '/:id' do

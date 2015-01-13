@@ -9,7 +9,7 @@ class LineupPerson
   field :phone, type: String
   field :position, type: Integer
 
-  has_one :location
+  belongs_to :location
   embeds_one :lineup_attributes
   
 end

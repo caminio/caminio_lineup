@@ -29,7 +29,18 @@ describe Caminio::V1::LineupVenues do
       it{ expect( json.lineup_venue ).to have_key(:reach_by_bus) }
       it{ expect( json.lineup_venue ).to have_key(:reach_by_tram) }
       it{ expect( json.lineup_venue ).to have_key(:reach_by_train) }
-      
+      it{ expect( json.lineup_venue ).to have_key(:tags) }
+      it{ expect( json.lineup_venue ).to have_key(:ext_ref_id) }
+      it{ expect( json.lineup_venue ).to have_key(:ext_ref_src) }
+      it{ expect( json.lineup_venue ).to have_key(:ext_ref_note) }
+      it{ expect( json.lineup_venue ).to have_key(:ext_ref_sync_at) }
+      it{ expect( json.lineup_venue ).to have_key(:orig_url) }
+      it{ expect( json.lineup_venue ).to have_key(:ext_url) }
+      it{ expect( json.lineup_venue ).to have_key(:video_url) }
+      it{ expect( json.lineup_venue ).to have_key(:video_type) }
+      it{ expect( json.lineup_venue ).to have_key(:others_write) }
+      it{ expect( json.lineup_venue ).to have_key(:notify_me_on_write) }
+
     end
 
   end
