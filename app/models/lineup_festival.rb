@@ -3,6 +3,7 @@ class LineupFestival
   include Mongoid::Document
   include Caminio::Timestamps
   include Caminio::Userstamps
+  include LineupAttributes
 
   field :title, type: String, localize: true
   field :description, type: String, localize: true
