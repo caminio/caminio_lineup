@@ -10,7 +10,7 @@ class LineupPerson
   field :lastname, type: String
   field :email, type: String
   field :phone, type: String
-  field :position, type: Integer
+  field :position, type: Integer, localize: true
 
   belongs_to :location
   
