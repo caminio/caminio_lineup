@@ -1,6 +1,8 @@
 class LineupEnsemble
 
   include Mongoid::Document
+  include Caminio::Timestamps
+  include Caminio::Userstamps
   include LineupAttributes
 
   field :title, type: String, localize: true

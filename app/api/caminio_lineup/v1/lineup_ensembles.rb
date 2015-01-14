@@ -2,7 +2,7 @@ module Caminio
 
   module V1
 
-    class LineupEntries < Grape::API
+    class LineupEnsembles < Grape::API
 
       default_format :json
       helpers Caminio::AuthHelper
@@ -13,7 +13,7 @@ module Caminio
       desc "lists all lineup_ensembles"
       get do
         ensembles = LineupEnsemble.all
-        present :lineup_entries, ensembles, with: LineupEnsembleEntity
+        present :lineup_ensembles, ensembles, with: LineupEnsembleEntity
       end
 
       #
