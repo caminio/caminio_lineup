@@ -8,8 +8,8 @@ class LineupFestival
   field :title, type: String, localize: true
   field :description, type: String, localize: true
 
-  has_many :jobs, class_name: "LineupJob"
-  has_many :events, class_name: "LineupEvent"
-  has_many :entrys, class_name: "LineupEntry"
+  embeds_many :jobs, class_name: "LineupJob"
+  embeds_many :events, class_name: "LineupEvent"
+  embeds_many :entrys, class_name: "LineupEntry"
 
 end

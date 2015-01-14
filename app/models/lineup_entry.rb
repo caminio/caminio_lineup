@@ -12,7 +12,7 @@ class LineupEntry
   field :num_breaks, type: Integer, default: 0
 
   embeds_many :lineup_jobs
-  embeds_many :lineup_ensembles
+  has_many :lineup_ensembles
   embeds_many :lineup_events
 
 end
