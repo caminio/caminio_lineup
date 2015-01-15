@@ -25,6 +25,7 @@ module Caminio
         person = LineupPerson.where(id: params.id).first
         error!('NotFound',404) unless person
         present :lineup_person, person, with: LineupPersonEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: person.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #
@@ -50,6 +51,7 @@ module Caminio
           optional :video_type
           optional :others_write
           optional :notify_me_on_write
+          optional :lineup_ensemble_ids
         end
       end
       post do
@@ -57,6 +59,7 @@ module Caminio
         person = LineupPerson.new( declared( params )[:lineup_person] )
         error!({ error: 'SavingFailed', details: person.errors.full_messages}, 422) unless person.save
         present :lineup_person, person, with: LineupPersonEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: person.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #
@@ -82,6 +85,7 @@ module Caminio
           optional :video_type
           optional :others_write
           optional :notify_me_on_write
+          optional :lineup_ensemble_ids
         end
       end
       put '/:id' do
@@ -90,6 +94,7 @@ module Caminio
         error! "LineupPersonNotFound", 404 unless person
         person.update_attributes( declared(params)[:lineup_person] )
         present :lineup_person, person.reload, with: LineupPersonEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: person.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #

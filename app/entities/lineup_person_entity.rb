@@ -21,6 +21,8 @@ class LineupPersonEntity < Grape::Entity
   expose :others_write
   expose :notify_me_on_write
 
+  expose :lineup_ensemble_ids
+
   expose :created_at
   expose :updated_at
 

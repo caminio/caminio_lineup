@@ -12,7 +12,7 @@ class LineupPerson
   field :phone, type: String
   field :position, type: Integer, localize: true
 
-  has_and_belongs_to_many :ensembles, class_name: "LineupEnsemble"
+  has_and_belongs_to_many :lineup_ensembles
   belongs_to :location
   
 end

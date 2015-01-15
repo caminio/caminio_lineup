@@ -45,6 +45,8 @@ describe Caminio::V1::LineupPersons do
       it{ expect( json.lineup_person ).to have_key(:video_type) }
       it{ expect( json.lineup_person ).to have_key(:others_write) }
       it{ expect( json.lineup_person ).to have_key(:notify_me_on_write) }
+      it{ expect( json.lineup_person ).to have_key(:lineup_ensemble_ids) }
+      it{ expect( json ).to have_key(:lineup_ensembles) }
 
     end
 
@@ -79,6 +81,7 @@ describe Caminio::V1::LineupPersons do
       it{ expect( last_response.status ).to be == 201 }
 
       it{ expect( json ).to have_key :lineup_person }
+      it{ expect( json ).to have_key(:lineup_ensembles) }
 
     end
 
