@@ -6,7 +6,7 @@ module Caminio
 
       default_format :json
       helpers Caminio::AuthHelper
-      helpers EventsHelper
+      helpers LineupParentsHelper
 
       #
       # GET /
@@ -83,6 +83,7 @@ module Caminio
         error! "LineupEventNotFound", 404 unless event
         event.update_attributes( declared(params)[:lineup_event] )
         present :lineup_event, event.reload, with: LineupEventEntity
+        present_parent parent
       end
 
       #

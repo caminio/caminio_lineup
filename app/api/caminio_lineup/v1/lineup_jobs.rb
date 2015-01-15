@@ -6,6 +6,7 @@ module Caminio
 
       default_format :json
       helpers Caminio::AuthHelper
+      helpers LineupParentsHelper
 
       #
       # GET /
