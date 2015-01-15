@@ -10,7 +10,7 @@ class LineupFestival
 
   embeds_many :jobs, class_name: "LineupJob"
   embeds_many :events, class_name: "LineupEvent"
-  has_and_belongs_to_many :entries, class_name: "LineupEntry"
+  has_and_belongs_to_many :lineup_entries
 
   index "events.starts" => 1
 

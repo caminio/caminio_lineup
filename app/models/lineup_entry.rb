@@ -13,7 +13,7 @@ class LineupEntry
 
   embeds_many :jobs, class_name: "LineupJob"
   embeds_many :events, class_name: "LineupEvent"
-  has_and_belongs_to_many :esembles, class_name: "LineupEnsemble"
+  has_and_belongs_to_many :lineup_ensembles
 
   index "events.starts" => 1
 
