@@ -8,5 +8,14 @@ module Caminio
       parent.first
     end
 
+    def present_parent parent
+       name = parent.class.name
+       if name == "LineupEntry"
+        present :lineup_entry, parent, with: LineupEntryEntity
+      else
+        present :lineup_festival, parent, with: LineupFestivalEntity
+      end
+    end
+
   end
 end

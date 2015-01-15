@@ -66,8 +66,8 @@ describe Caminio::V1::LineupEvents do
       end
 
       it{ expect( last_response.status ).to be == 201 }
-
       it{ expect( json ).to have_key :lineup_event }
+      it{ expect( json ).to have_key :lineup_entry }
 
     end
 
