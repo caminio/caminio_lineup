@@ -13,6 +13,7 @@ class LineupEventEntity < Grape::Entity
   expose :cancelled
   
   expose :lineup_venue_id
+  expose :lineup_ensemble_ids
   
   expose :created_at
   expose :updated_at

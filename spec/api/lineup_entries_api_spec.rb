@@ -93,8 +93,8 @@ describe Caminio::V1::LineupEntries do
           put "v1/lineup_entries/#{@lineup_entry.id}", { lineup_entry: { categories: @new_categories } }
         end
 
-        it { expect( last_response.status ).to eq(200) }
-        it { expect( json.lineup_entry.categories ).to eq( @new_categories ) }
+        it{ expect( last_response.status ).to eq(200) }
+        it{ expect( json.lineup_entry.categories ).to eq( @new_categories ) }
         it{ expect( json.lineup_entry ).to have_key(:lineup_event_ids) }
         it{ expect( json ).to have_key(:lineup_events) }
 

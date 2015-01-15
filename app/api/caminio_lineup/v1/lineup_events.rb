@@ -45,6 +45,7 @@ module Caminio
           optional :derniere
           optional :cancelled
           optional :lineup_venue_id
+          optional :lineup_ensemble_ids
         end
         optional :lineup_entry_id
         optional :lineup_festival_id
@@ -57,6 +58,7 @@ module Caminio
         present :lineup_event, event, with: LineupEventEntity
         present_parent parent
         present :lineup_venue, LineupVenue.where( id: event.lineup_venue_id ).first, with: LineupVenueEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: event.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #
