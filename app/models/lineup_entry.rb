@@ -11,8 +11,10 @@ class LineupEntry
   field :duration_min, type: Integer, default: 60
   field :num_breaks, type: Integer, default: 0
 
-  embeds_many :lineup_jobs
-  has_many :lineup_ensembles
-  embeds_many :lineup_events
+  embeds_many :jobs, class_name: "LineupJob"
+  embeds_many :events, class_name: "LineupEvent"
+  has_and_belongs_to_many :esembles, class_name: "LineupEnsemble"
+
+  index "events.starts" => 1
 
 end

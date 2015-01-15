@@ -8,7 +8,9 @@ class LineupEnsemble
   field :title, type: String, localize: true
   field :description, type: String, localize: true
 
-  embeds_many :members, class_name: "LineupPerson"
+  has_and_belongs_to_many  :members, class_name: "LineupPerson"
+  has_and_belongs_to_many  :entries, class_name: "LineupEntry"
+  
   belongs_to :location
 
 end
