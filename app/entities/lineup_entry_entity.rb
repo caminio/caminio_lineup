@@ -5,6 +5,14 @@ class LineupEntryEntity < Grape::Entity
       event.id
     end
   end
+
+  expose :lineup_job_ids do |entry|
+    entry.jobs.map do |event|
+      event.id
+    end
+  end
+  
+  expose :lineup_ensemble_ids
         
   expose :id
   expose :categories

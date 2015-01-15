@@ -42,6 +42,7 @@ module Caminio
           optional :recommended_age
           optional :duration_min
           optional :num_breaks
+          optional :lineup_ensemble_ids
         end
       end
       post do
@@ -50,6 +51,8 @@ module Caminio
         error!({ error: 'SavingFailed', details: entry.errors.full_messages}, 422) unless entry.save
         present :lineup_entry, entry, with: LineupEntryEntity
         present :lineup_events, entry.events, with: LineupEventEntity
+        present :lineup_jobs, entry.jobs, with: LineupJobEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: entry.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #
@@ -63,6 +66,7 @@ module Caminio
           optional :recommended_age
           optional :duration_min
           optional :num_breaks
+          optional :lineup_ensemble_ids
         end
       end
       put '/:id' do
@@ -72,6 +76,8 @@ module Caminio
         entry.update_attributes( declared(params)[:lineup_entry] )
         present :lineup_entry, entry.reload, with: LineupEntryEntity
         present :lineup_events, entry.events, with: LineupEventEntity
+        present :lineup_jobs, entry.jobs, with: LineupJobEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: entry.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #
