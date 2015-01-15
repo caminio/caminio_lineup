@@ -13,5 +13,4 @@ class LineupVenue
   
   belongs_to :location
 
-  # todo map location
 end
