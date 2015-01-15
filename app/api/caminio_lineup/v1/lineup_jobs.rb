@@ -48,6 +48,7 @@ module Caminio
         error!({ error: 'SavingFailed', details: job.errors.full_messages}, 422) unless job.save
         present :lineup_job, job, with: LineupJobEntity
         present_parent parent
+        present :lineup_person, LineupPerson.where( id: job.lineup_person_id ).first, with: LineupPersonEntity 
       end
 
       #
@@ -71,6 +72,7 @@ module Caminio
         job.update_attributes( declared(params)[:lineup_job] )
         present :lineup_job, job.reload, with: LineupJobEntity
         present_parent parent
+        present :lineup_person, LineupPerson.where( id: job.lineup_person_id ).first, with: LineupPersonEntity 
       end
 
       #

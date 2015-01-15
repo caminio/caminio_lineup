@@ -64,6 +64,9 @@ describe Caminio::V1::LineupJobs do
       it{ expect( last_response.status ).to be == 201 }
 
       it{ expect( json ).to have_key :lineup_job }
+      it{ expect( json[:lineup_job] ).to have_key :lineup_person_id }
+      it{ expect( json ).to have_key :lineup_person }
+      it{ expect( json ).to have_key :lineup_entry }
 
     end
 
@@ -90,6 +93,9 @@ describe Caminio::V1::LineupJobs do
 
         it { expect( last_response.status ).to eq(200) }
         it { expect( json.lineup_job.title ).to eq( @new_title ) }
+        it { expect( json[:lineup_job] ).to have_key :lineup_person_id }
+        it { expect( json ).to have_key :lineup_person }
+        it { expect( json ).to have_key :lineup_entry }
 
       end
 
