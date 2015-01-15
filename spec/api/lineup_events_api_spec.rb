@@ -42,12 +42,16 @@ describe Caminio::V1::LineupEvents do
     before :each do
       @user = create(:user)
       @lineup_entry = create(:lineup_entry)  
+      @lineup_venue = create(:lineup_venue)
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
     end
 
     let(:url){ 'v1/lineup_events' }
     let(:error_400){ 'lineup_event is missing' }
-    let(:post_attr){ { lineup_event: { starts: Date.new() }, lineup_entry_id: @lineup_entry.id } }
+    let(:post_attr){ { 
+      lineup_event: { starts: Date.new(), lineup_venue_id: @lineup_venue.id }, 
+      lineup_entry_id: @lineup_entry.id } 
+    }
 
     describe "requires" do
 
@@ -67,7 +71,9 @@ describe Caminio::V1::LineupEvents do
 
       it{ expect( last_response.status ).to be == 201 }
       it{ expect( json ).to have_key :lineup_event }
+      it{ expect( json.lineup_event ).to have_key :lineup_venue_id }
       it{ expect( json ).to have_key :lineup_entry }
+      it{ expect( json ).to have_key :lineup_venue }
 
     end
 

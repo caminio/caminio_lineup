@@ -17,6 +17,7 @@ class LineupEvent
   field :derniere, type: Boolean, default: false
   field :cancelled, type: Boolean, default: false
 
+  has_many :lineup_ensembles
   belongs_to :lineup_venue
   embedded_in :lineup_entry
   embedded_in :lineup_festival

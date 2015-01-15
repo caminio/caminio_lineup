@@ -7,6 +7,7 @@ describe Caminio::V1::LineupEntries do
     before :each do
       @user = create(:user)
       @lineup_entry = create(:lineup_entry)
+      @lineup_event = @lineup_entry.events.create(starts: Date.new())   
       @url = "v1/lineup_entries"
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
       header 'Organization-id', @user.organizations.first
@@ -24,6 +25,7 @@ describe Caminio::V1::LineupEntries do
         get "v1/lineup_entries/#{@lineup_entry.id}"
       end
 
+      it{ puts json.lineup_entry.inspect }
       it{ expect( json.lineup_entry ).to have_key(:id) }
       it{ expect( json.lineup_entry ).to have_key(:categories) }
       it{ expect( json.lineup_entry ).to have_key(:age) }

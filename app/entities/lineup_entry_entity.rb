@@ -1,4 +1,10 @@
 class LineupEntryEntity < Grape::Entity
+
+  expose :lineup_event_ids do |entry|
+    entry.events.map do |event|
+      event.id
+    end
+  end
         
   expose :id
   expose :categories

@@ -44,6 +44,7 @@ module Caminio
           optional :premiere
           optional :derniere
           optional :cancelled
+          optional :lineup_venue_id
         end
         optional :lineup_entry_id
         optional :lineup_festival_id
@@ -55,6 +56,7 @@ module Caminio
         error!({ error: 'SavingFailed', details: event.errors.full_messages}, 422) unless event.save
         present :lineup_event, event, with: LineupEventEntity
         present_parent parent
+        present :lineup_venue, LineupVenue.where( id: event.lineup_venue_id ).first, with: LineupVenueEntity
       end
 
       #
@@ -72,6 +74,7 @@ module Caminio
           optional :premiere
           optional :derniere
           optional :cancelled
+          optional :lineup_venue_id
         end
         optional :lineup_entry_id
         optional :lineup_festival_id
@@ -84,6 +87,7 @@ module Caminio
         event.update_attributes( declared(params)[:lineup_event] )
         present :lineup_event, event.reload, with: LineupEventEntity
         present_parent parent
+        present :lineup_venue, LineupVenue.where( id: event.lineup_venue_id ).first, with: LineupVenueEntity
       end
 
       #
