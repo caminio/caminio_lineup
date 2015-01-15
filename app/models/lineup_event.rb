@@ -18,5 +18,7 @@ class LineupEvent
   field :cancelled, type: Boolean, default: false
 
   belongs_to :lineup_venue
+  embedded_in :lineup_entry
+  embedded_in :lineup_festival
 
 end
