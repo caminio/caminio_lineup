@@ -53,6 +53,7 @@ module Caminio
         parent = get_parent!
         event = parent.events.new( declared( params )[:lineup_event] )
         error!({ error: 'SavingFailed', details: event.errors.full_messages}, 422) unless event.save
+        puts parent.class.name
         present :lineup_event, event, with: LineupEventEntity
       end
 
