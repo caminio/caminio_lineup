@@ -13,7 +13,10 @@ module Caminio
       desc "lists all lineup_entries"
       get do
         lineup_entries = LineupEntry.all
+        events = []
+        lineup_entries.each { |entry| events.concat entry.events }
         present :lineup_entries, lineup_entries, with: LineupEntryEntity
+        present :lineup_events, events, with: LineupEventEntity
       end
 
       #
@@ -25,6 +28,7 @@ module Caminio
         entry = LineupEntry.where(id: params.id).first
         error!('NotFound',404) unless entry
         present :lineup_entry, entry, with: LineupEntryEntity
+        present :lineup_events, entry.events, with: LineupEventEntity
       end
 
       #
@@ -45,6 +49,7 @@ module Caminio
         entry = LineupEntry.new( declared( params )[:lineup_entry] )
         error!({ error: 'SavingFailed', details: entry.errors.full_messages}, 422) unless entry.save
         present :lineup_entry, entry, with: LineupEntryEntity
+        present :lineup_events, entry.events, with: LineupEventEntity
       end
 
       #
@@ -66,6 +71,7 @@ module Caminio
         error! "LineupEntryNotFound", 404 unless entry
         entry.update_attributes( declared(params)[:lineup_entry] )
         present :lineup_entry, entry.reload, with: LineupEntryEntity
+        present :lineup_events, entry.events, with: LineupEventEntity
       end
 
       #

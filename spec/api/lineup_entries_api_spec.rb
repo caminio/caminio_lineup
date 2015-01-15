@@ -17,6 +17,7 @@ describe Caminio::V1::LineupEntries do
       get @url
       expect( last_response.status ).to be == 200
       expect( json ).to have_key(:lineup_entries)
+      expect( json ).to have_key(:lineup_events)
     end
 
     describe "json return properties" do
@@ -25,13 +26,14 @@ describe Caminio::V1::LineupEntries do
         get "v1/lineup_entries/#{@lineup_entry.id}"
       end
 
-      it{ puts json.lineup_entry.inspect }
       it{ expect( json.lineup_entry ).to have_key(:id) }
       it{ expect( json.lineup_entry ).to have_key(:categories) }
       it{ expect( json.lineup_entry ).to have_key(:age) }
       it{ expect( json.lineup_entry ).to have_key(:recommended_age) }
       it{ expect( json.lineup_entry ).to have_key(:duration_min) }
       it{ expect( json.lineup_entry ).to have_key(:num_breaks) }
+      it{ expect( json.lineup_entry ).to have_key(:lineup_event_ids) }
+      it{ expect( json ).to have_key(:lineup_events) }
 
     end
 
@@ -66,6 +68,8 @@ describe Caminio::V1::LineupEntries do
       it{ expect( last_response.status ).to be == 201 }
 
       it{ expect( json ).to have_key :lineup_entry }
+      it{ expect( json.lineup_entry ).to have_key(:lineup_event_ids) }
+      it{ expect( json ).to have_key(:lineup_events) }
 
     end
 
@@ -91,6 +95,8 @@ describe Caminio::V1::LineupEntries do
 
         it { expect( last_response.status ).to eq(200) }
         it { expect( json.lineup_entry.categories ).to eq( @new_categories ) }
+        it{ expect( json.lineup_entry ).to have_key(:lineup_event_ids) }
+        it{ expect( json ).to have_key(:lineup_events) }
 
       end
 
