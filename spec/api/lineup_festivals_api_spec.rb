@@ -27,6 +27,10 @@ describe Caminio::V1::LineupFestivals do
       it{ expect( json.lineup_festival ).to have_key(:id) }
       it{ expect( json.lineup_festival ).to have_key(:title) }
       it{ expect( json.lineup_festival ).to have_key(:description) }
+      it{ expect( json.lineup_festival ).to have_key(:lineup_entry_ids) }
+      it{ expect( json ).to have_key(:lineup_entries) }
+      it{ expect( json ).to have_key(:lineup_jobs) }
+      it{ expect( json ).to have_key(:lineup_events) }
 
     end
 
