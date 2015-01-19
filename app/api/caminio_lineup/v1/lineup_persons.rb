@@ -23,9 +23,11 @@ module Caminio
       get ':id' do
         authenticate!
         person = LineupPerson.where(id: params.id).first
+        location = Location.where( id: person[:location_id] ).first
         error!('NotFound',404) unless person
         present :lineup_person, person, with: LineupPersonEntity
         present :lineup_ensembles, LineupEnsemble.in( id: person.lineup_ensemble_ids ), with: LineupEnsembleEntity
+        present :location, location, with: LocationEntity
       end
 
       #
@@ -52,14 +54,17 @@ module Caminio
           optional :others_write
           optional :notify_me_on_write
           optional :lineup_ensemble_ids
+          optional :location_id
         end
       end
       post do
         authenticate!
         person = LineupPerson.new( declared( params )[:lineup_person] )
         error!({ error: 'SavingFailed', details: person.errors.full_messages}, 422) unless person.save
+        location = Location.where( id: person[:location_id] ).first
         present :lineup_person, person, with: LineupPersonEntity
         present :lineup_ensembles, LineupEnsemble.in( id: person.lineup_ensemble_ids ), with: LineupEnsembleEntity
+        present :location, location, with: LocationEntity
       end
 
       #
@@ -86,6 +91,7 @@ module Caminio
           optional :others_write
           optional :notify_me_on_write
           optional :lineup_ensemble_ids
+          optional :location_id
         end
       end
       put '/:id' do
@@ -93,8 +99,10 @@ module Caminio
         person = LineupPerson.find params.id 
         error! "LineupPersonNotFound", 404 unless person
         person.update_attributes( declared(params)[:lineup_person] )
+        location = Location.where( id: params.lineup_person[:location_id] ).first
         present :lineup_person, person.reload, with: LineupPersonEntity
         present :lineup_ensembles, LineupEnsemble.in( id: person.lineup_ensemble_ids ), with: LineupEnsembleEntity
+        present :location, location, with: LocationEntity
       end
 
       #

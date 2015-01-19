@@ -55,12 +55,13 @@ describe Caminio::V1::LineupPersons do
 
     before :each do
       @user = create(:user)
+      @location = create(:location)
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
     end
 
     let(:url){ 'v1/lineup_persons' }
     let(:error_400){ 'lineup_person is missing' }
-    let(:post_attr){ { lineup_person: { firstname: "8:00-18:00" } } }
+    let(:post_attr){ { lineup_person: { firstname: "8:00-18:00", location_id: @location.id } } }
 
     describe "requires" do
 
@@ -82,6 +83,11 @@ describe Caminio::V1::LineupPersons do
 
       it{ expect( json ).to have_key :lineup_person }
       it{ expect( json ).to have_key(:lineup_ensembles) }
+      it{ expect( json ).to have_key :location }
+
+      it{ expect( json[:lineup_person] ).to have_key :location_id }
+      it{ expect( json[:location] ).to have_key :id }
+      it{ expect( json[:location].street ).to eq(@location.street) }
 
     end
 
