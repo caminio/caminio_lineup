@@ -22,6 +22,7 @@ class LineupPersonEntity < Grape::Entity
   expose :notify_me_on_write
 
   expose :lineup_ensemble_ids
+  expose :location_id
 
   expose :created_at
   expose :updated_at

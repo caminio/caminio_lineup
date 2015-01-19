@@ -90,6 +90,7 @@ module Caminio
         present :lineup_event, event.reload, with: LineupEventEntity
         present_parent parent
         present :lineup_venue, LineupVenue.where( id: event.lineup_venue_id ).first, with: LineupVenueEntity
+        present :lineup_ensembles, LineupEnsemble.in( id: event.lineup_ensemble_ids ), with: LineupEnsembleEntity
       end
 
       #

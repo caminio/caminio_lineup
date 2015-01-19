@@ -80,7 +80,6 @@ describe Caminio::V1::LineupEvents do
       it{ expect( json ).to have_key :lineup_entry }
       it{ expect( json ).to have_key :lineup_venue }
       it{ expect( json ).to have_key :lineup_ensembles }
-      it{ expect( json ).to have_key :lineup_jobs }
 
     end
 
@@ -110,7 +109,6 @@ describe Caminio::V1::LineupEvents do
         it { expect( json ).to have_key :lineup_entry }
         it { expect( json ).to have_key :lineup_venue }
         it { expect( json ).to have_key :lineup_ensembles }
-        it { expect( json ).to have_key :lineup_jobs }
 
       end
 
