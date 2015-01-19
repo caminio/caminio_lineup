@@ -39,12 +39,13 @@ describe Caminio::V1::LineupEnsembles do
 
     before :each do
       @user = create(:user)
+      @location = create(:location)
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
     end
 
     let(:url){ 'v1/lineup_ensembles' }
     let(:error_400){ 'lineup_ensemble is missing' }
-    let(:post_attr){ { lineup_ensemble: { title: "a new ensemble" } } }
+    let(:post_attr){ { lineup_ensemble: { title: "a new ensemble", location_id: @location.id } } }
 
     describe "requires" do
 
@@ -65,6 +66,11 @@ describe Caminio::V1::LineupEnsembles do
       it{ expect( last_response.status ).to be == 201 }
 
       it{ expect( json ).to have_key :lineup_ensemble }
+      it{ expect( json ).to have_key :location }
+
+      it{ expect( json[:lineup_ensemble] ).to have_key :location_id }
+      it{ expect( json[:location] ).to have_key :id }
+      it{ expect( json[:location].street ).to eq(@location.street) }
 
     end
 

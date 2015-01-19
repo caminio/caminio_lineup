@@ -23,10 +23,12 @@ module Caminio
       get ':id' do
         authenticate!
         ensemble = LineupEnsemble.where(id: params.id).first
+        location = Location.where( id: ensemble[:location_id] ).first
         error!('NotFound',404) unless ensemble
         present :lineup_ensemble, ensemble, with: LineupEnsembleEntity
         present :lineup_entries, LineupEntry.in( id: ensemble.lineup_entry_ids ), with: LineupEntryEntity
         present :lineup_persons, LineupPerson.in( id: ensemble.lineup_person_ids ), with: LineupPersonEntity
+        present :location, location, with: LocationEntity
       end
 
       #
@@ -39,15 +41,18 @@ module Caminio
           optional :description
           optional :lineup_entry_ids
           optional :lineup_person_ids
+          optional :location_id
         end
       end
       post do
         authenticate!
         ensemble = LineupEnsemble.new( declared( params )[:lineup_ensemble] )
+        location = Location.where( id: params.lineup_ensemble[:location_id] ).first
         error!({ error: 'SavingFailed', details: ensemble.errors.full_messages}, 422) unless ensemble.save
         present :lineup_ensemble, ensemble, with: LineupEnsembleEntity
         present :lineup_entries, LineupEntry.in( id: ensemble.lineup_entry_ids ), with: LineupEntryEntity
         present :lineup_persons, LineupPerson.in( id: ensemble.lineup_person_ids ), with: LineupPersonEntity
+        present :location, location, with: LocationEntity
       end
 
       #
@@ -60,16 +65,19 @@ module Caminio
           optional :description
           optional :lineup_entry_ids
           optional :lineup_person_ids
+          optional :location_id
         end
       end
       put '/:id' do
         authenticate!
         ensemble = LineupEnsemble.find params.id 
+        location = Location.where( id: params.lineup_ensemble[:location_id] ).first
         error! "LineupEnsembleNotFound", 404 unless ensemble
         ensemble.update_attributes( declared(params)[:lineup_ensemble] )
         present :lineup_ensemble, ensemble.reload, with: LineupEnsembleEntity
         present :lineup_entries, LineupEntry.in( id: ensemble.lineup_entry_ids ), with: LineupEntryEntity
         present :lineup_persons, LineupPerson.in( id: ensemble.lineup_person_ids ), with: LineupPersonEntity
+        present :location, location, with: LocationEntity
       end
 
       #
