@@ -11,6 +11,12 @@ class LineupEntryEntity < Grape::Entity
       event.id
     end
   end
+
+  expose :mediafile_ids do |entry|
+    entry.mediafiles.map do |mf|
+      mf.id
+    end
+  end
   
   expose :lineup_ensemble_ids
         

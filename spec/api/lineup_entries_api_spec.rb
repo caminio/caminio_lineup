@@ -33,6 +33,7 @@ describe Caminio::V1::LineupEntries do
       it{ expect( json.lineup_entry ).to have_key(:duration_min) }
       it{ expect( json.lineup_entry ).to have_key(:num_breaks) }
       it{ expect( json.lineup_entry ).to have_key(:lineup_event_ids) }
+      it{ expect( json.lineup_entry ).to have_key(:mediafile_ids) }
       it{ expect( json ).to have_key(:lineup_events) }
 
     end
