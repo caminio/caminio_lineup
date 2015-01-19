@@ -48,12 +48,13 @@ describe Caminio::V1::LineupVenues do
 
     before :each do
       @user = create(:user)
+      @location = create(:location)
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
     end
 
     let(:url){ 'v1/lineup_venues' }
     let(:error_400){ 'lineup_venue is missing' }
-    let(:post_attr){ { lineup_venue: { opening_hours: "8:00-18:00" } } }
+    let(:post_attr){ { lineup_venue: { opening_hours: "8:00-18:00", location_id: @location.id } } }
 
     describe "requires" do
 
@@ -74,6 +75,11 @@ describe Caminio::V1::LineupVenues do
       it{ expect( last_response.status ).to be == 201 }
 
       it{ expect( json ).to have_key :lineup_venue }
+      it{ expect( json ).to have_key :location }
+
+      it{ expect( json[:lineup_venue] ).to have_key :location_id }
+      it{ expect( json[:location] ).to have_key :id }
+      it{ expect( json[:location].street ).to eq(@location.street) }
 
     end
 

@@ -19,6 +19,8 @@ class LineupVenueEntity < Grape::Entity
   expose :others_write
   expose :notify_me_on_write
 
+  expose :location_id
+
   expose :created_at
   expose :updated_at
 
