@@ -8,6 +8,8 @@ describe Caminio::V1::LineupEntries do
       @user = create(:user)
       @lineup_entry = create(:lineup_entry)
       @lineup_event = @lineup_entry.events.create(starts: Date.new())   
+      @mediafile = create(:mediafile, parent_id: @lineup_entry.id, parent_type: "LineupEntry" )
+
       @url = "v1/lineup_entries"
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
       header 'Organization-id', @user.organizations.first

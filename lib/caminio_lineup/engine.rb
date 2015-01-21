@@ -4,7 +4,6 @@ module CaminioLineup
   class Engine < ::Rails::Engine
 
     isolate_namespace Caminio
-
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
     config.autoload_paths += Dir[File.join( File.expand_path('../../../',__FILE__), 'app', 'api')]
 
@@ -23,6 +22,7 @@ module CaminioLineup
       Rails.application.config.assets.precompile += %w( caminio-lineup.js 
                                                         caminio-lineup.css )
     end
+
 
   end
 end

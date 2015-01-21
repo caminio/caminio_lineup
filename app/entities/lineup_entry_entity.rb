@@ -1,21 +1,15 @@
 class LineupEntryEntity < Grape::Entity
 
   expose :lineup_event_ids do |entry|
-    entry.events.map do |event|
-      event.id
-    end
+    entry.events.map &:id
   end
 
   expose :lineup_job_ids do |entry|
-    entry.jobs.map do |event|
-      event.id
-    end
+    entry.jobs.map &:id
   end
 
   expose :mediafile_ids do |entry|
-    entry.mediafiles.map do |mf|
-      mf.id
-    end
+    entry.mediafiles.map &:id
   end
   
   expose :lineup_ensemble_ids
