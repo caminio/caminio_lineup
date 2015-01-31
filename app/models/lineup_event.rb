@@ -4,7 +4,7 @@ class LineupEvent
   include Caminio::Timestamps
   include Caminio::Userstamps
 
-  field :starts, type: Date
+  field :starts, type: DateTime
 
   field :note, type: String, localize: true
   field :book_phone, type: String
