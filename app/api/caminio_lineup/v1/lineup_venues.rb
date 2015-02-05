@@ -48,16 +48,13 @@ module Caminio
           optional :video_type
           optional :others_write
           optional :notify_me_on_write
-          optional :location_id
         end
       end
       post do
         authenticate!
         venue = LineupVenue.new( declared( params )[:lineup_venue] )
         error!({ error: 'SavingFailed', details: venue.errors.full_messages}, 422) unless venue.save
-        location = Location.where( id: params.lineup_venue[:location_id] ).first
         present :lineup_venue, venue, with: LineupVenueEntity
-        present :location, location, with: LocationEntity
       end
 
       #

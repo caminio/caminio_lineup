@@ -1,7 +1,7 @@
-class LineupVenueEntity < Grape::Entity
-        
-  expose :id
+require "caminio/location"
 
+class LineupVenueEntity < LocationEntity
+        
   expose :reach_by_bus
   expose :reach_by_tram
   expose :reach_by_train
@@ -18,10 +18,5 @@ class LineupVenueEntity < Grape::Entity
   expose :video_type
   expose :others_write
   expose :notify_me_on_write
-
-  expose :location_id
-
-  expose :created_at
-  expose :updated_at
 
 end
