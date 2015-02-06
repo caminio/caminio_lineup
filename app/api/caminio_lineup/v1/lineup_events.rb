@@ -9,27 +9,6 @@ module Caminio
       helpers LineupParentsHelper
 
       #
-      # GET /
-      #
-      # desc "lists all lineup_events"
-      # get do
-      #   events = LineupEvent.all
-      #   present :lineup_events, events, with: LineupEventEntity
-      # end
-
-      #
-      # GET /:id
-      #
-      # desc "returns lineup_event with :id"
-      # get ':id' do
-      #   authenticate!
-      #   puts LineupEntry.first.events.inspect
-      #   event = LineupEvent.where(id: params.id).first
-      #   error!('NotFound',404) unless event
-      #   present :lineup_event, event, with: LineupEventEntity
-      # end
-
-      #
       # POST /
       #
       desc "create a new lineup_event"

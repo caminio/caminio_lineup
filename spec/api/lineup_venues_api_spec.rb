@@ -52,8 +52,8 @@ describe Caminio::V1::LineupVenues do
     end
 
     let(:url){ 'v1/lineup_venues' }
-    let(:error_400){ 'lineup_venue is missing' }
-    let(:post_attr){ { lineup_venue: { opening_hours: "8:00-18:00" } } }
+    let(:error_400){ 'lineup_venue is missing, lineup_venue[title] is missing' }
+    let(:post_attr){ { lineup_venue: { opening_hours: "8:00-18:00",  title: "test venue" } } }
 
     describe "requires" do
 
@@ -61,7 +61,7 @@ describe Caminio::V1::LineupVenues do
 
       it { post(url); expect( json.error ).to be == error_400 }
 
-      it { post(url, { lineup_venue: { } } ); expect( json.error ).to be == error_400 }
+      it { post(url, { lineup_venue: {} } ); expect( json.error ).to be == error_400 }
 
     end
 

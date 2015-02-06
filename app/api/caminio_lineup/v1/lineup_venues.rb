@@ -33,6 +33,7 @@ module Caminio
       desc "create a new lineup_venue"
       params do
         requires :lineup_venue, type: Hash do
+          requires :title
           optional :opening_hours
           optional :reach_by_bus
           optional :reach_by_tram
@@ -48,6 +49,24 @@ module Caminio
           optional :video_type
           optional :others_write
           optional :notify_me_on_write
+          
+          optional :description
+          optional :street
+          optional :zip
+          optional :city
+          optional :country_code
+          optional :state
+          optional :building
+          optional :stair
+          optional :floor
+          optional :room
+          optional :gkz
+          optional :addition
+          optional :lat
+          optional :lng
+          optional :url
+          optional :phone
+          optional :email
         end
       end
       post do
@@ -78,6 +97,25 @@ module Caminio
           optional :video_type
           optional :others_write
           optional :notify_me_on_write
+          
+          optional :title
+          optional :description
+          optional :street
+          optional :zip
+          optional :city
+          optional :country_code
+          optional :state
+          optional :building
+          optional :stair
+          optional :floor
+          optional :room
+          optional :gkz
+          optional :addition
+          optional :lat
+          optional :lng
+          optional :url
+          optional :phone
+          optional :email
         end
       end
       put '/:id' do
