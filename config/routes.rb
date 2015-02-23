@@ -8,4 +8,6 @@ Rails.application.routes.draw do
   mount Caminio::V1::LineupEvents     => "/api/v1/lineup_events"
   mount Caminio::V1::LineupFestivals  => "/api/v1/lineup_festivals"
 
+  get '/lineup' => 'lineup#index'
+
 end
