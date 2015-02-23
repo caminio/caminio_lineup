@@ -36,7 +36,10 @@ module Caminio
       #
       desc "create a new lineup_entry"
       params do
-        requires :lineup_entry, type: Hash do
+        requires :lineup_entry, type: Hash do          
+          optional :title
+          optional :subtitle
+          optional :description
           optional :categories
           optional :age
           optional :recommended_age
@@ -60,7 +63,10 @@ module Caminio
       #
       desc "update an existing lineup_entry"
       params do
-        requires :lineup_entry, type: Hash do
+        requires :lineup_entry, type: Hash do   
+          optional :title
+          optional :subtitle
+          optional :description
           optional :categories
           optional :age
           optional :recommended_age
