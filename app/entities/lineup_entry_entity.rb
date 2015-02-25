@@ -15,6 +15,9 @@ class LineupEntryEntity < Grape::Entity
   expose :lineup_ensemble_ids
         
   expose :id
+  expose :title
+  expose :subtitle
+  expose :description
   expose :categories
 
   expose :age
