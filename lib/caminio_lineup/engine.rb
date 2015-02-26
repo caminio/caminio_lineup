@@ -19,8 +19,8 @@ module CaminioLineup
     end
 
     initializer :assets do |config|
-      Rails.application.config.assets.precompile += %w( caminio-lineup.js 
-                                                        caminio-lineup.css )
+      Rails.application.config.assets.precompile += %w( lineup.js 
+                                                        lineup.css )
     end
 
 

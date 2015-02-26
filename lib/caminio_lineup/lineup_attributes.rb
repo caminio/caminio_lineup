@@ -16,7 +16,7 @@ module LineupAttributes
     field :video_url, type: String
     field :video_type, type: String
 
-    field :others_write, type: String
+    field :others_write, type: Boolean, default: true
     field :notify_me_on_write, type: Boolean, default: true
 
   end
