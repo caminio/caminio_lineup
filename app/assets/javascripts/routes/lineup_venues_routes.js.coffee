@@ -28,6 +28,7 @@ Caminio.LineupVenuesEditRoute = Caminio.LineupVenuesIndexRoute.extend
 
   actions:
     willTransition: (transition)->
+      return if transition.queryParams.force
       if Caminio.get('lastPath')
         @transitionTo Caminio.get('lastPath')
 
@@ -45,7 +46,7 @@ Caminio.LineupVenuesNewRoute = Caminio.LineupVenuesIndexRoute.extend
         locale: Em.I18n.locale
 
   renderTemplate: (controller)->
-    indexController = @controllerFor 'lineup_index'
+    indexController = @controllerFor 'lineup_venues_index'
     indexController.set 'content', controller.get 'content'
     @render 'lineup_venues.index',
       controller: indexController
