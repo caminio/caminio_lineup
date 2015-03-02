@@ -1,0 +1,43 @@
+<nav class="content-nav">
+  <header class="app-header">
+    <div class="app-btn-group">
+      <a href="#" {{action 'toggleFollow' 'ticket_venues'}}
+        {{translateAttr data-hint='lineup.venues.follow'}}
+        class="hint--bottom hint--bounce">
+        <i class="fa fa-rss"></i>
+      </a>
+    </div>
+    <div class="app-title">{{t 'lineup.venues.title'}}</div>
+  </header>
+
+  <section>
+
+    {{#link-to 'lineup_venues.new' class='btn btn-default btn-sm icon-text'}}
+      <i class="fa fa-plus"></i>
+      {{t 'lineup.venue.new'}}
+    {{/link-to}}
+
+    <hr>
+
+    <div {{bind-attr class=":search filter:active"}}>
+      <i class="fa fa-search"></i>
+      {{#if filter}}<i class="fa fa-times" {{action 'clearFilter'}}></i>{{/if}}
+      {{input value=filter placeholderTranslation='lineup.venue.search'}}
+    </div>
+  </section>
+
+</nav>
+
+<section class="content">
+
+  <ul class="list list-header">
+    <li>
+    <div class="list-icon"></div>
+    <div class="list-title">{{t 'name'}}</div>
+    <div class="list-date">{{t 'created_at'}}</div>
+    <div class="list-actions"></div>
+    </li>
+  </ul>
+  <ul class="list">
+  </div>
+</section>

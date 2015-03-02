@@ -1,0 +1,14 @@
+<nav class="main-menu">
+  {{#link-to 'ticketeer.index' current-when='users'}}
+    <i class="fa fa-calendar-o"></i>
+    {{t 'lineup.entries.title'}}
+  {{/link-to}}
+  {{#link-to 'ticketeer_customers.index'}}
+    <i class="fa fa-map-marker"></i>
+    {{t 'lineup.venues.title'}}
+  {{/link-to}}
+</nav>
+
+<div class="content-wrap">
+  {{yield}}
+</div>
