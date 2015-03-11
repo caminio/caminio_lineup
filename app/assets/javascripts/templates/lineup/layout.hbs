@@ -1,9 +1,9 @@
 <nav class="main-menu">
-  {{#link-to 'ticketeer.index' current-when='users'}}
+  {{#link-to 'ticketeer.index' current-when='lineup_entries'}}
     <i class="fa fa-calendar-o"></i>
     {{t 'lineup.entries.title'}}
   {{/link-to}}
-  {{#link-to 'ticketeer_customers.index'}}
+  {{#link-to 'ticketeer_customers.index' current-when='lineup_venues'}}
     <i class="fa fa-map-marker"></i>
     {{t 'lineup.venues.title'}}
   {{/link-to}}
