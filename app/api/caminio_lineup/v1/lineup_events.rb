@@ -9,6 +9,20 @@ module Caminio
       helpers LineupParentsHelper
 
       #
+      # GET /
+      #
+      desc "returns the events of the parent"
+      params do
+        optional :lineup_entry_id
+        optional :lineup_festival_id
+      end
+      get do      
+        parent = get_parent!
+        present :lineup_events, parent.events, with: LineupEventEntity    
+        present_parent parent    
+      end
+
+      #
       # POST /
       #
       desc "create a new lineup_event"
