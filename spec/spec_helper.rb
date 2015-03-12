@@ -28,6 +28,10 @@ Dir.glob("#{File::expand_path '../factories', __FILE__}/*.rb").each do |file|
   require file
 end
 
+Dir.glob( File.expand_path("../helpers", __FILE__)+'/**/*.rb' ).each do |file|
+  require file
+end
+
 module RspecHelper
   module CaminioHelper
 

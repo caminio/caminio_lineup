@@ -3,6 +3,7 @@ class LineupEvent
   include Mongoid::Document
   include Caminio::Timestamps
   include Caminio::Userstamps
+  # include Caminio::AccessRules
 
   field :starts, type: DateTime
 

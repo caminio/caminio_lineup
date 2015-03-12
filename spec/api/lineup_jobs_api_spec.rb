@@ -2,6 +2,15 @@ require 'spec_helper'
 
 describe Caminio::V1::LineupJobs do
 
+  include APIHelper
+
+  classname = "lineup_job"
+
+  before :each do
+    create_user_and_set_header
+    # set_class classname
+  end
+
   # describe "/lineup_jobs" do
 
   #   before :each do
@@ -36,9 +45,7 @@ describe Caminio::V1::LineupJobs do
   describe "POST /lineup_jobs" do
 
     before :each do
-      @user = create(:user)
       @lineup_entry = create(:lineup_entry)  
-      header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
     end
 
     let(:url){ 'v1/lineup_jobs' }
@@ -75,11 +82,8 @@ describe Caminio::V1::LineupJobs do
   describe "PUT /lineup_jobs/:id" do
 
     before :each do
-      @user = create(:user)
       @lineup_entry = create(:lineup_entry)
       @lineup_job = @lineup_entry.jobs.create(title: "a job")     
-      header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
-      header 'Organization-id', @user.organizations.first
     end
 
     describe "update" do
@@ -90,7 +94,7 @@ describe Caminio::V1::LineupJobs do
           @new_title = "a new job"
           put "v1/lineup_jobs/#{@lineup_job.id}", { lineup_job: { title: @new_title }, lineup_entry_id: @lineup_entry.id }
         end
-
+        
         it { expect( last_response.status ).to eq(200) }
         it { expect( json.lineup_job.title ).to eq( @new_title ) }
         it { expect( json[:lineup_job] ).to have_key :lineup_person_id }
@@ -106,11 +110,8 @@ describe Caminio::V1::LineupJobs do
   describe "DELETE /lineup_jobs/:id" do
 
     before :each do
-      @user = create(:user)
       @lineup_entry = create(:lineup_entry)
       @lineup_job = @lineup_entry.jobs.create(title: "a job")   
-      header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
-      header 'Organization-id', @user.organizations.first
       delete "v1/lineup_jobs/#{@lineup_job.id}", { lineup_entry_id: @lineup_entry.id }
     end
 

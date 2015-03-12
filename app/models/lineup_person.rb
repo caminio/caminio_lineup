@@ -3,6 +3,7 @@ class LineupPerson
   include Mongoid::Document
   include Caminio::Timestamps
   include Caminio::Userstamps
+  include Caminio::AccessRules
   include LineupAttributes
 
   field :firstname, type: String
