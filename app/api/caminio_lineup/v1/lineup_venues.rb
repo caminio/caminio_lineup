@@ -7,6 +7,8 @@ module Caminio
       default_format :json
       helpers Caminio::AuthHelper
 
+      before { set_organization }
+
       #
       # GET /
       #
