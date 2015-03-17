@@ -3,6 +3,7 @@ Em.I18n.availableTranslations.de ||= {}
 
 Em.merge Em.I18n.availableTranslations.de,
   lineup:
+    title: 'Veranstaltungen'
     venue:
       search: 'Ort suchen'
       new: 'Neuer Veranstaltungsort'
