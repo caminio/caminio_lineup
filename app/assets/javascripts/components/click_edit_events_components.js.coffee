@@ -128,7 +128,8 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
   actions:
 
     saveChanges: ->
-      if @get 'content.isNew'
+      content = @get('content') || @get('targetObject.content')
+      if content.get 'isNew'
         return @set 'editValue', false
       @set('valueSaving', true)
       @get('parentController').send(@get('saveActionName'), @saveCallback, @)
@@ -160,9 +161,11 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
       @toggleProperty 'showQuickEventForm'
 
     editEvents: ->
+      content = @get('content') || @get('targetObject.content')
+      
       @get('parentController').send 'openMiniModal', 'select_events_for_click_edit', @, (modal)=>
 
-        @set 'showQuickEventForm', true if @get('content.lineup_entry.lineup_events.length') < 1
+        @set 'showQuickEventForm', true if content.get('lineup_entry.lineup_events.length') < 1
 
         @setupQuickEventForm(modal)
 
