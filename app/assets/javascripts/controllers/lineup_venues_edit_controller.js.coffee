@@ -17,7 +17,6 @@ Caminio.LineupVenuesEditController = Ember.ObjectController.extend
             text: Em.I18n.t('saved', name: @get('venue.title'))
 
     delete: ->
-      console.log @get('venue')
       bootbox.confirm Em.I18n.t('lineup.venue.really_delete', name: @get('venue.title')), (proceed)=>
         return unless proceed
         @get('venue')
