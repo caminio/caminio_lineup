@@ -9,7 +9,7 @@ describe Caminio::V1::LineupVenues do
       @lineup_venue = create(:lineup_venue)
       @url = "v1/lineup_venues"
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
-      header 'Organization-id', @user.organizations.first
+      header 'Organization-id', @user.organizations.first.id
     end
 
     it "returns lineup_venues json" do
@@ -85,7 +85,7 @@ describe Caminio::V1::LineupVenues do
       @user = create(:user)
       @lineup_venue = create(:lineup_venue)
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
-      header 'Organization-id', @user.organizations.first
+      header 'Organization-id', @user.organizations.first.id
     end
 
     describe "update" do
@@ -112,7 +112,7 @@ describe Caminio::V1::LineupVenues do
       @user = create(:user)
       @lineup_venue = create(:lineup_venue)
       header 'Authorization', "Bearer #{@user.aquire_api_key.token}"
-      header 'Organization-id', @user.organizations.first
+      header 'Organization-id', @user.organizations.first.id
       delete "v1/lineup_venues/#{@lineup_venue.id}"
     end
 
