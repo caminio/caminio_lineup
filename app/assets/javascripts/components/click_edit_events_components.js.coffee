@@ -28,6 +28,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
     if arguments.length > 1
       @set 'value', moment() unless @get('value')
       @set 'value', moment(@get('value')).hours(val.split(':')[0]).minutes(val.split(':')[1]).toDate()
+    console.log 'time set to ', val, @get('value')
     moment(@get('value')).format('HH:mm')
   ).property 'value'
 
@@ -39,7 +40,10 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
       hours = moment(@get('value')).hours()
       minutes = moment(@get('value')).minutes()
     if arguments.length > 1
-      @set 'value', moment(val, 'DD-MM-YYYY').hours(hours).minutes(minutes).toDate()
+      d = moment(val, 'DD-MM-YYYY')
+      d.hours(hours) if hours
+      d.minutes(minutes) if hours
+      @set 'value', d.toDate()
       console.log 'set to ', val, @get('value')
     moment(@get('value')).format('DD-MM-YYYY')
   ).property 'value'
