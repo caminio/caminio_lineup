@@ -11,6 +11,10 @@ class LineupEntryEntity < Grape::Entity
   expose :mediafile_ids do |entry|
     entry.mediafiles.map &:id
   end
+
+  expose :quote_ids do |entry|
+    entry.quotes.map &:id
+  end
   
   expose :lineup_ensemble_ids
         

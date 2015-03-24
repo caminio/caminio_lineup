@@ -17,10 +17,12 @@ module Caminio
         optional :lineup_festival_id
       end
       get do  
-        authenticate_public!    
+        authenticate_public!
         parent = get_parent!
-        present :lineup_events, parent.events, with: LineupEventEntity    
-        present_parent parent    
+        if parent
+          present :lineup_events, parent.events, with: LineupEventEntity    
+          present_parent parent
+        end    
       end
 
       #

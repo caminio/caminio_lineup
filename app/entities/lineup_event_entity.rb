@@ -12,7 +12,7 @@ class LineupEventEntity < Grape::Entity
   expose :derniere
   expose :cancelled
   
-  expose :lineup_venue_id
+  expose :lineup_venue_id 
   expose :lineup_ensemble_ids
   
   expose :created_at

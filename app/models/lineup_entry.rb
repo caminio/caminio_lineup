@@ -19,7 +19,7 @@ class LineupEntry
   has_many :mediafiles, as: :parent
   embeds_many :jobs, class_name: "LineupJob"
   embeds_many :events, class_name: "LineupEvent"
-  embeds_many :quotes, class_name: "PressQuotes"
+  embeds_many :quotes, class_name: "PressQuote"
   has_and_belongs_to_many :lineup_ensembles
 
   index "events.starts" => 1

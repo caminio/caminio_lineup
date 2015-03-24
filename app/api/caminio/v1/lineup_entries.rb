@@ -13,7 +13,7 @@ module Caminio
       desc "lists all lineup_entries"
       get do
         authenticate_public!
-        lineup_entries = LineupEntry.all
+        lineup_entries = LineupEntry.unscoped.all
         events = []
         lineup_entries.each { |entry| events.concat entry.events }
         present :lineup_entries, lineup_entries, with: LineupEntryEntity
