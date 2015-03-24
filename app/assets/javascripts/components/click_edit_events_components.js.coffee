@@ -28,7 +28,6 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
     if arguments.length > 1
       @set 'value', moment() unless @get('value')
       @set 'value', moment(@get('value')).hours(val.split(':')[0]).minutes(val.split(':')[1]).toDate()
-    console.log 'time set to ', val, @get('value')
     moment(@get('value')).format('HH:mm')
   ).property 'value'
 
@@ -44,7 +43,6 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
       d.hours(hours) if hours
       d.minutes(minutes) if hours
       @set 'value', d.toDate()
-      console.log 'set to ', val, @get('value')
     moment(@get('value')).format('DD-MM-YYYY')
   ).property 'value'
 
@@ -109,7 +107,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
   availableVenues: Em.A()
 
   selectEvent: (date)->
-    console.log date, @
+    console.log 'TODO: implement me (selectEvent in click_edit_events_componnet', date, @
         
   setupQuickEventForm: (modal)->
     $(modal).find('.datepicker').pikaday
