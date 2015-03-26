@@ -11,7 +11,7 @@ module Caminio
       #
       # GET /
       #
-      desc "returns the events of the parent"
+      desc "returns the events of the parent that start in the future"
       params do
         optional :lineup_entry_id
         optional :lineup_festival_id
@@ -20,7 +20,9 @@ module Caminio
         authenticate_public!
         parent = get_parent!
         if parent
-          present :lineup_events, parent.events, with: LineupEventEntity    
+          events = []
+          parent.events.each { |evt| events.push evt if evt.starts > DateTime.now }
+          present :lineup_events, events, with: LineupEventEntity    
           present_parent parent
         end    
       end

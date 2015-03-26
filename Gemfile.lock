@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/caminio/caminio.git
-  revision: 444d98ec59d07c03f578b1d81c0a4d422101408e
+  revision: 9fb070712e5d26d76461be55f368bd1fa21e820e
   branch: v2
   specs:
     caminio (2.0.1)

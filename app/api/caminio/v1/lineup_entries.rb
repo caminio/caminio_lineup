@@ -10,12 +10,14 @@ module Caminio
       #
       # GET /
       #
-      desc "lists all lineup_entries"
+      desc "lists all lineup_entries with an event in the future"
       get do
         authenticate_public!
-        lineup_entries = LineupEntry.unscoped.all
+        lineup_entries = LineupEntry.elem_match( events: { starts: { '$gt' => DateTime.now } } )
         events = []
-        lineup_entries.each { |entry| events.concat entry.events }
+        lineup_entries.each do |entry| 
+          entry.events.each { |evt| events.push evt if evt.starts > DateTime.now }
+        end
         present :lineup_entries, lineup_entries, with: LineupEntryEntity
         present :lineup_events, events, with: LineupEventEntity
       end
