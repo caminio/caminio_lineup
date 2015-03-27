@@ -1,5 +1,8 @@
 Caminio.ClickEditEventsComponent = Ember.Component.extend
 
+  venue: null
+  starts: moment().add(1,'h').minutes(0).toDate()
+
   saveClickComponent: (e)->
     return unless $('.editing-click-form').length
     return if $(e.target).hasClass('.editing-click-form')
@@ -24,27 +27,27 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
   saveActionName: 'save'
 
   timeValue: ((key,val)->
-    return moment().format('HH')+':00' if !val && !@get('value')
+    return moment().format('HH')+':00' if !val && !@get('starts')
     if arguments.length > 1
-      @set 'value', moment() unless @get('value')
-      @set 'value', moment(@get('value')).hours(val.split(':')[0]).minutes(val.split(':')[1]).toDate()
-    moment(@get('value')).format('HH:mm')
-  ).property 'value'
+      @set 'starts', moment() unless @get('starts')
+      @set 'starts', moment(@get('starts')).hours(val.split(':')[0]).minutes(val.split(':')[1]).toDate()
+    moment(@get('starts')).format('HH:mm')
+  ).property 'starts'
 
   dateValue: ((key,val)->
     return moment().format('DD-MM-YYYY') if !val && !@get('value')
     hours = moment().format('HH')
     minutes = 0
-    if @get 'value'
-      hours = moment(@get('value')).hours()
-      minutes = moment(@get('value')).minutes()
+    if @get 'starts'
+      hours = moment(@get('starts')).hours()
+      minutes = moment(@get('starts')).minutes()
     if arguments.length > 1
       d = moment(val, 'DD-MM-YYYY')
       d.hours(hours) if hours
       d.minutes(minutes) if hours
-      @set 'value', d.toDate()
-    moment(@get('value')).format('DD-MM-YYYY')
-  ).property 'value'
+      @set 'starts', d.toDate()
+    moment(@get('starts')).format('DD-MM-YYYY')
+  ).property 'starts'
 
   monthValue: (->
     moment(@get('value')).format('MMMM')
@@ -104,10 +107,24 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
     @$('.timepicker').timeEntry
       timeSteps: [1, 15, 0]
 
+    venue = @get('targetObject.content.lineup_venue')
+    venue = @get('targetObject.content.ticketeer_venue') unless venue
+    @set('venue', venue)
+
+  lineupEvents: (->
+    content = @get('targetObject.content')
+    events = []
+    events = content.get('lineup_events') if content.get('lineup_events')
+    events = content.get('lineup_entry.lineup_events') if content.get('lineup_entry')
+    events
+  ).property 'targetObject.content'
+
   availableVenues: Em.A()
 
   selectEvent: (date)->
-    console.log 'TODO: implement me (selectEvent in click_edit_events_componnet', date, @
+    entry = @get('targetObject.lineup_entry')
+    events = entry.get('lineup_events')
+    lineupEvent = @get('targetObject').store.createRecord 'lineup_event', starts: date, lineup_venue: @get('venue'), lineup_entry: entry
         
   setupQuickEventForm: (modal)->
     $(modal).find('.datepicker').pikaday
@@ -123,7 +140,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
 
     # because of animate.css animation 500ms
     Em.run.later =>
-      user = @get('parentController.controllers.application.currentUser')
+      user = @get('targetObject.controllers.application.currentUser')
       @send 'startTour' if user.get('completed_tours').indexOf('lineup_series') < 0
     , 500
 
@@ -134,7 +151,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
       if content.get 'isNew'
         return @set 'editValue', false
       @set('valueSaving', true)
-      @get('parentController').send(@get('saveActionName'), @saveCallback, @)
+      @get('targetObject').send(@get('saveActionName'), @saveCallback, @)
 
     cancelEdit: ->
       @set('editValue',false)
@@ -153,7 +170,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
       , 300
 
     startTour: ->
-      user = @get('parentController.controllers.application.currentUser')
+      user = @get('targetObject.controllers.application.currentUser')
       Caminio.LineupSeriesWalkthrough.start ->
         return if user.get('completed_tours').indexOf('lineup_series') >= 0
         user.get('completed_tours').push 'lineup_series'
@@ -165,10 +182,15 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
     editEvents: ->
       content = @get('content') || @get('targetObject.content')
       
-      @get('parentController').send 'openMiniModal', 'select_events_for_click_edit', @, (modal)=>
+      @get('targetObject').send 'openMiniModal', 'select_events_for_click_edit', @, (modal)=>
 
         @set 'showQuickEventForm', true if content.get('lineup_entry.lineup_events.length') < 1
 
         @setupQuickEventForm(modal)
 
+Caminio.SelectEventsItemController = Ember.ObjectController.extend
+  
+  actions:
 
+    save: ->
+      console.log 'here save in select_events_item_controller'

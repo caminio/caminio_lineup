@@ -26,7 +26,7 @@
               {{t 'lineup.venue.title'}}
             </div>
             {{view 'selectize'
-              value=curEvent.venue_id
+              selection=venue
               content=availableVenues
               allowCreate=false
               optionLabelPath='content.title'
@@ -42,7 +42,7 @@
               <i class="fa fa-clock-o"></i>
               {{t 'time'}}
             </div>
-            {{input value=curEvent.startsTime class='timepicker'}}
+            {{input value=controller.timeValue class='timepicker'}}
           </div>
         </div>
 
@@ -52,14 +52,8 @@
               <i class="fa fa-calendar-o"></i>
               {{t 'date'}}
             </div>
-            {{input value=curEvent.startsDate class='datepicker'}}
+            {{input value=controller.dateValue class='datepicker'}}
           </div>
-        </div>
-
-        <div class="form-group align-right">
-          <button class="btn btn-primary">
-            {{t 'lineup.event.add'}}
-          </button>
         </div>
 
       </form>
@@ -67,6 +61,12 @@
     </header>
     <section class="modal-body">
       <ul class="select-options">
+        {{#each lineupEvent in lineupEvents itemController='select_events_item'}}
+          <li>
+            {{click-edit-datetime value=lineupEvent.starts
+              label='ticketeer.event.starts'}}
+          </li>
+        {{/each}}
       </ul>
     </section>
   </div>
