@@ -1,7 +1,7 @@
 Caminio.ClickEditEventsComponent = Ember.Component.extend
 
   venue: null
-  starts: moment().add(1,'h').minutes(0).toDate()
+  value: null
 
   saveClickComponent: (e)->
     return unless $('.editing-click-form').length
@@ -13,7 +13,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
     @_super()
     @set('origValue', '')
     @set('origValue', @get('value')) unless Em.isEmpty(@get('value'))
-    @set('value','') if Em.isEmpty(@get('value'))
+    @set('value',moment().add(1,'h').minutes(0).toDate()) if Em.isEmpty(@get('value'))
     
     $(document)
       .off('click', $.proxy(@saveClickComponent, @))
@@ -27,27 +27,27 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
   saveActionName: 'save'
 
   timeValue: ((key,val)->
-    return moment().format('HH')+':00' if !val && !@get('starts')
+    return moment().format('HH')+':00' if !val && !@get('value')
     if arguments.length > 1
-      @set 'starts', moment() unless @get('starts')
-      @set 'starts', moment(@get('starts')).hours(val.split(':')[0]).minutes(val.split(':')[1]).toDate()
-    moment(@get('starts')).format('HH:mm')
-  ).property 'starts'
+      @set 'value', moment() unless @get('value')
+      @set 'value', moment(@get('value')).hours(val.split(':')[0]).minutes(val.split(':')[1]).toDate()
+    moment(@get('value')).format('HH:mm')
+  ).property 'value'
 
   dateValue: ((key,val)->
     return moment().format('DD-MM-YYYY') if !val && !@get('value')
     hours = moment().format('HH')
     minutes = 0
-    if @get 'starts'
-      hours = moment(@get('starts')).hours()
-      minutes = moment(@get('starts')).minutes()
-    if arguments.length > 1
+    if @get 'value'
+      hours = moment(@get('value')).hours()
+      minutes = moment(@get('value')).minutes()
+    if val
       d = moment(val, 'DD-MM-YYYY')
       d.hours(hours) if hours
       d.minutes(minutes) if hours
-      @set 'starts', d.toDate()
-    moment(@get('starts')).format('DD-MM-YYYY')
-  ).property 'starts'
+      @set 'value', d.toDate()
+    moment(@get('value')).format('DD-MM-YYYY')
+  ).property 'value'
 
   monthValue: (->
     moment(@get('value')).format('MMMM')
@@ -124,7 +124,7 @@ Caminio.ClickEditEventsComponent = Ember.Component.extend
   selectEvent: (date)->
     entry = @get('targetObject.lineup_entry')
     events = entry.get('lineup_events')
-    lineupEvent = @get('targetObject').store.createRecord 'lineup_event', starts: date, lineup_venue: @get('venue'), lineup_entry: entry
+    lineupEvent = @get('targetObject').store.createRecord 'lineup_event', value: date, lineup_venue: @get('venue'), lineup_entry: entry
         
   setupQuickEventForm: (modal)->
     $(modal).find('.datepicker').pikaday
@@ -193,4 +193,4 @@ Caminio.SelectEventsItemController = Ember.ObjectController.extend
   actions:
 
     save: ->
-      console.log 'here save in select_events_item_controller'
+      console.log 'TODO: save in select_events_item_controller'
